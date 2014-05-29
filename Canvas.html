@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Canvas</title>
+<link href="Custom.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-2.1.0.min.js"> </script>
+
+</head>
+
+<body>
+<div id="drawing-div">
+	<canvas id="drawingboard" width="800" height="800">
+    <p> Your browser doesn't support canvas </p>
+    </canvas>
+</div>
+<div class="blue">
+<a href="#" id="bluecolor"> Blue </a>
+</div>
+
+<div class="red">
+<a href="#" id="redcolor"> Red </a>
+</div>
+
+<div class="yellow">
+<a href="#" id="yellowcolor"> Yellow </a>
+</div>
+
+
+<div id="select-color-div">
+</div>
+
+
+<script>
+var startx;
+var starty;
+var endx;
+var endy;
+var width;
+var height;
+var selectedcolor;
+
+
+	$(document).ready(function() {
+		$("#bluecolor").click(function() {
+			selectedcolor = "#00F";
+		});
+		$("#redcolor").click(function() {
+			selectedcolor = "#F00";
+		});
+		$("#yellowcolor").click(function() {
+			selectedcolor = "#FF0";
+		});
+		$("#drawingboard").mousedown(function(m) {
+			startx = m.pageX;
+			starty = m.pageY;
+		});
+		$("#drawingboard").mouseup(function(m) {
+			endx = m.pageX;
+			endy = m.pageY;
+			width = endx-startx;
+			height = endy-starty;
+			var drawingboard = document.getElementById("drawingboard");
+			var drawingcontext = drawingboard.getContext('2d');
+			drawingcontext.fillStyle = selectedcolor;
+			drawingcontext = drawingcontext.fillRect(startx, starty, width, height);
+
+		});
+	});
+</script>
+</body>
+</html>
